@@ -17,7 +17,6 @@ messages = [
 def run(cmd, env=None):
     subprocess.run(cmd, shell=True, env=env, check=True)
 
-# Make sure git exists
 if not os.path.exists(".git"):
     run("git init")
 
@@ -36,12 +35,10 @@ for line in lines:
 
     amount = int(amount)
 
-    # Convert 7.3.2025 -> 2025-03-07
     date = datetime.strptime(date_str, "%d.%m.%Y")
     git_date = date.strftime("%Y-%m-%d 12:%M:%S")
 
     for i in range(amount):
-        # Make a tiny change so Git has something to commit
         with open("history.txt", "a") as f:
             f.write(f"Commit {commit_number}\n")
 
